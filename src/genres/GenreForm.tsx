@@ -22,7 +22,7 @@ export default function GenreForm(props: GenresFormProps) {
                 <Form className="col-8 offset-2">
                     <TextField field="name" displayName="Name" />
                     <Button disabled={formikProps.isSubmitting} type='submit'>Create</Button>
-                    <Link to='/genres' className="btn btn-secondary btn-xm">Cancel</Link>
+                    <Link to='/genres' className="btn btn-secondary btn-sm">Cancel</Link>
                 </Form>
             )}
 
