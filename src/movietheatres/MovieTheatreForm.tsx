@@ -1,13 +1,21 @@
 import { Form, Formik, FormikHelpers } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from 'yup';
+import MapField from "../forms/MapField";
 import TextField from "../forms/TextField";
 import Button from "../utils/Button";
-import Map from "../utils/Map";
+import coordinateDTO from "../utils/coordinatesDTO.model";
 import { movieTheatreCreationDTO } from "./movieTheatre.model.d";
 
 export default function movieTheatreForm(props: movieTheatreFormProps) {
 
+    const transformCoordinates = (): (coordinateDTO[] | undefined) => {
+        if (props.model.latitude && props.model.longitude) {
+            const response: coordinateDTO = {lat: props.model.latitude, lng: props.model.longitude};
+            return [response];
+        }
+        return undefined;
+    }
     return (
         <Formik
             initialValues={props.model}
@@ -20,7 +28,9 @@ export default function movieTheatreForm(props: movieTheatreFormProps) {
                 <Form>
                     <TextField displayName="Name" field="name" />
                     <div style={ {marginBottom: '1rem'} }>
-                        <Map />
+                        <MapField latField="latitude" lngField="longitude"
+                            coordinates={transformCoordinates()}
+                        />
                     </div>
                     <Button type='submit' disabled={ formikProps.isSubmitting }>
                         Save Changes

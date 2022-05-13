@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 export default function Map(props: mapProps){
-    const [coordinates, setCoordinates] = useState<coordinateDTO[]>([])
+    const [coordinates, setCoordinates] = useState<coordinateDTO[]>(props.coordinates)
 
     const defaultIcon = L.icon({
         iconUrl: icon,
@@ -26,6 +26,7 @@ export default function Map(props: mapProps){
             />
             <MapClick setCoordinates={ coordinates=> {
                 setCoordinates([coordinates]);
+                props.handleMapClick(coordinates);
             }} />
             { coordinates.map( (coordinates, index)=> <Marker key={index}
             position={[coordinates.lat, coordinates.lng]} /> )}
@@ -36,6 +37,8 @@ export default function Map(props: mapProps){
 
 interface mapProps {
     height: string;
+    coordinates: coordinateDTO[];
+    handleMapClick(coordinates: coordinateDTO): void;
 }
 
 Map.defaultProps = {
