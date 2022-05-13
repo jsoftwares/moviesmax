@@ -32,9 +32,9 @@ export default function MultipleSelector(props: multipleSelectorProps) {
                     {props.nonSelected.map( item => 
                         <li key={item.key} onClick={ ()=> {select(item)}} >{item.value}</li>)}
                 </ul>
-                <div className="multiple-selector buttons">
-                    <button type='button' onClick={selectAll} >{'>>'}</button>
-                    <button type='button' onClick={deSelectAll}>{'<<'}</button>
+                <div className="multiple-selector-buttons">
+                    <button type='button' className='btn btn-sm btn-secondary' onClick={selectAll} >{'>>'}</button>
+                    <button type='button' className='btn btn-sm btn-secondary' onClick={deSelectAll}>{'<<'}</button>
                 </div>
                 <ul>
                     {props.selected.map( item => 
@@ -49,7 +49,7 @@ interface multipleSelectorProps {
     displayName: string;
     selected: multipleSelectorModel[];
     nonSelected: multipleSelectorModel[];
-    onChange(selected: multipleSelectorModel[], nonSelected: multipleSelectorModel[]):any;
+    onChange(selected: multipleSelectorModel[], nonSelected: multipleSelectorModel[]):void;
 }
 
 export interface multipleSelectorModel{
