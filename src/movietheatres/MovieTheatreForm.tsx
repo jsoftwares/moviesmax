@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as Yup from 'yup';
 import TextField from "../forms/TextField";
 import Button from "../utils/Button";
+import Map from "../utils/Map";
 import { movieTheatreCreationDTO } from "./movieTheatre.model.d";
 
 export default function movieTheatreForm(props: movieTheatreFormProps) {
@@ -18,6 +19,9 @@ export default function movieTheatreForm(props: movieTheatreFormProps) {
             { (formikProps) => (
                 <Form>
                     <TextField displayName="Name" field="name" />
+                    <div style={ {marginBottom: '1rem'} }>
+                        <Map />
+                    </div>
                     <Button type='submit' disabled={ formikProps.isSubmitting }>
                         Save Changes
                     </Button>
