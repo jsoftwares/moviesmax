@@ -5,3 +5,10 @@ export interface actorCreationDTO {
     pictureURL?: string;     //EDIT: used when reading/displaying a picture path stored for user.
     biography?: string;
 }
+
+export interface actorMovieDTO {
+    id: number;
+    name: string;
+    character: string;
+    picture: string;
+}

@@ -1,6 +1,6 @@
 import './App.css';
 import Menu from './Menu';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import routes from './route-config';
 import configureValidations from './Validations';
 
@@ -12,15 +12,13 @@ function App() {
     <BrowserRouter>
       <Menu />
       <div className='container'>
-        <Switch>
+        <Routes>
 
           {routes.map( route =>
-            <Route key={route.path} path={route.path} exact={route.exact} >
-              <route.component />
-            </Route>
+            <Route key={route.path} path={route.path} element={<route.component />} />
           )}
 
-        </Switch>
+        </Routes>
       </div>
     </BrowserRouter>
   );
