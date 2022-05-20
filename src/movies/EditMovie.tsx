@@ -1,3 +1,4 @@
+import { actorMovieDTO } from "../actors/actors.model";
 import { GenreDTO } from "../genres/genres.model";
 import { movieTheatreDTO } from "../movietheatres/movieTheatre.model.d";
 import MovieForm from "./MovieForm";
@@ -7,6 +8,9 @@ export default function EditMovie(){
     const nonSelectedGenres: GenreDTO[] = [{id: 2, name: 'Drama'}]
     const selectedMovieTheatres: movieTheatreDTO[] = [{id: 1, name: 'iMax'}];
     const nonSelectedMovieTheatres: movieTheatreDTO[] = [{id: 2, name: 'Geneis'}, {id: 3, name: 'Silverbird'}]
+    const selectedActors: actorMovieDTO[] = [
+        {id: 1, name: 'Tom Holland', character: 'Gerald', picture:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tom_Holland_by_Gage_Skidmore.jpg/330px-Tom_Holland_by_Gage_Skidmore.jpg'}
+    ]
     return (
         <>
             <h3>Edit Movie</h3>

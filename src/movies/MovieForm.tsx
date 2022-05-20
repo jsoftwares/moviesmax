@@ -33,6 +33,7 @@ export default function MovieForm(props: movieFormProps) {
                 //get the IDs of the genres selected into our Formik form values so that they can also get submitted
                 values.genresIds = selectedGenres.map( item => item.key) 
                 values.movieTheatresIds = selectedMovieTheatres.map( item => item.key) 
+                values.actors = selectActors
                 props.onSubmit(values, actions)
             }}
             validationSchema={Yup.object({
