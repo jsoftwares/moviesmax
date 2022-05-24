@@ -13,7 +13,8 @@ export default function GenreForm(props: GenresFormProps) {
         } onSubmit={ props.onSubmit }
         validationSchema = { Yup.object(
             {
-                name: Yup.string().required('Name field is required').firstLetterUppercase()
+                name: Yup.string().required('Name field is required')
+                .max(50, 'Max length is 50 characters').firstLetterUppercase()
             }
         )} 
         >

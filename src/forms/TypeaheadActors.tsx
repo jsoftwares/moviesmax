@@ -40,13 +40,14 @@ export default function TypeAheadActors(props: typeAheadActorsProps) {
             <Typeahead 
                 id="typeahead"
                 onChange={ actors => {
-                    if (props.actors.findIndex( x=> x.id === actors[0].id) === -1 ) {
-                        props.onAdd([...props.actors, actors[0]]);                        
-                    }
+                    // if (props.actors.findIndex( x=> x.id === actors[0].id) === -1 ) {
+                    //     props.onAdd([...props.actors, actors[0]]);                        
+                    // }
                     console.log(actors);
                 } }
                 options={actors}
-                labelKey= { actor => actor.name }
+                // labelKey= { actor => actor.name }
+                labelKey='name'
                 filterBy={ ['name']}
                 placeholder='Type actor name here...'
                 minLength={1}
@@ -54,10 +55,10 @@ export default function TypeAheadActors(props: typeAheadActorsProps) {
                 selected={selelcted}
                 renderMenuItemChildren={ (actor)=> (
                     <>
-                        <img alt='actor' src={ actor.picture}
+                        {/* <img alt='actor' src={ actor.picture}
                             style={ {height: '64px', marginRight: '10px', width: '64px'} }
                         />
-                        <span>{actor.name}</span>
+                        <span>{actor.name}</span> */}
                     </>
                 )}
             />
