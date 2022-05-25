@@ -16,7 +16,7 @@ import RedirectToLandingPage from "./utils/RedirectToLandingPage";
 const routes = [
     {path: '/genres', component: IndexGenres, exact: true},
     {path: '/genres/create', component: CreateGenre},
-    {path: '/genres/edit/:id(\\d+)', component: EditGenres},
+    {path: '/genres/edit/:id(\\d+)', component: EditGenres},    //regex means it must be an integer
 
     {path: '/actors', component: IndexActors, exact: true},
     {path: '/actors/create', component: CreateActor},
