@@ -7,6 +7,7 @@ import GenericList from '../utils/GenericList';
 import Button from "../utils/Button";
 import Pagination from "../utils/Pagination";
 import RecordsPerPageSelect from "../utils/RecordsPerPageSelect";
+import customConfirm from "../utils/CustomConfirmt";
 
 export default function IndexGenres() {
     const [genres, setGenres] = useState<GenreDTO[]>();
@@ -15,16 +16,30 @@ export default function IndexGenres() {
     const [page, setPage] = useState(1);
 
     useEffect( () => {
-        const getGenres = async() => {
-            const response: AxiosResponse<GenreDTO[]> = await axios.get(urlGenres, {
-                params: {page, recordsPerPage}
-            });
-            const totalAmountOfPages = parseInt(response.headers['totalamountofrecords'], 10);
-            setTotalAmountOfPages(Math.ceil(totalAmountOfPages / recordsPerPage));
-            setGenres(response.data);
-        }
-        getGenres();
+        
+        loadGenres();
     }, [page, recordsPerPage]);
+
+    const loadGenres = async() => {
+        const response: AxiosResponse<GenreDTO[]> = await axios.get(urlGenres, {
+            params: {page, recordsPerPage}
+        });
+        const totalAmountOfPages = parseInt(response.headers['totalamountofrecords'], 10);
+        setTotalAmountOfPages(Math.ceil(totalAmountOfPages / recordsPerPage));
+        setGenres(response.data);
+    }
+
+    async function deleteGenre(id:  number){
+        try {
+            await axios.delete(`${urlGenres}/${id}`);
+            loadGenres();
+        } catch (error: any) {
+            if (error && error.response) {
+                console.error(error.response.data);
+                
+            }
+        }
+    }
     return (
         <>
             <h3>Genres</h3>
@@ -56,7 +71,10 @@ export default function IndexGenres() {
                             <td>{genre.name}</td>
                             <td>
                                 <Link to={`/genres/edit/${genre.id}`} className="btn btn-sm btn-warning text-white">Edit</Link>
-                                <Button className="btn btn-sm btn-danger">Delete</Button>
+                                <Button 
+                                    className="btn btn-sm btn-danger"
+                                    onClick={ () => customConfirm( () => deleteGenre(genre.id)) }
+                                >Delete</Button>
                             </td>
                         </tr>)}
                     </tbody>
