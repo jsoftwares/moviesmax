@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { urlMovieTheatres } from "../endpoints";
 import IndexEntity from "../utils/IndexEntity";
 import { movieTheatreDTO } from "./movieTheatre.model.d";
