@@ -1,6 +1,7 @@
 import { actorCreationDTO } from "../actors/actors.model";
+import { movieCreationDTO } from "../movies/movies.model";
 
-export default function convertActorToFormData(actor: actorCreationDTO): FormData {
+export function convertActorToFormData(actor: actorCreationDTO): FormData {
     const formData = new FormData();
     formData.append('name', actor.name);
     if (actor.biography) {
@@ -12,6 +13,27 @@ export default function convertActorToFormData(actor: actorCreationDTO): FormDat
     if (actor.picture) {
         formData.append('picture', actor.picture);
     }
+
+    return formData;
+}
+
+export function convertMovieToFormData(movie:movieCreationDTO) {
+    const formData = new FormData();
+
+    formData.append('title', movie.title);
+
+    if (movie.summary) formData.append('summary', movie.summary);
+
+    formData.append('trailer', movie.trailer);
+    formData.append('inTheatres', String(movie.inTheatres));   //its a Boolean & we need to transform it to a string
+
+    if (movie.releaseDate) formData.append('releaseDate', formatDate(movie.releaseDate));
+
+    if (movie.poster) formData.append('poster', movie.poster);
+
+    formData.append('genresId', JSON.stringify(movie.genresIds));
+    formData.append('movieTheatresIds', JSON.stringify(movie.movieTheatresIds));
+    formData.append('actors', JSON.stringify(movie.actors));
 
     return formData;
 }

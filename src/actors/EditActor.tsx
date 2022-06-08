@@ -1,6 +1,6 @@
 import { urlActors } from "../endpoints";
 import EditEntity from "../utils/EditEntity";
-import convertActorToFormData from "../utils/formDataUtils";
+import {convertActorToFormData} from "../utils/formDataUtils";
 import ActorForm from "./ActorForm";
 import { actorCreationDTO, actorDTO } from "./actors.model";
 
