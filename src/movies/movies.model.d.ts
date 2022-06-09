@@ -6,6 +6,13 @@ export interface movieDTO {
     id: number;
     title: string;
     poster: string;
+    inTheatres: boolean;
+    trailer: string;
+    summary?: string;
+    releaseDate: Date;
+    genres: GenreDTO[];
+    movieTheatres: movieTheatreDTO[];
+    actors?: actorMovieDTO[];
 }
 
 export interface movieCreationDTO {
