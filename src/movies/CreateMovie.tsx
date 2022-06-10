@@ -8,7 +8,7 @@ import DisplayErrors from "../utils/DisplayErrors";
 import { convertMovieToFormData } from "../utils/formDataUtils";
 import Loading from "../utils/Loading";
 import MovieForm from "./MovieForm";
-import { movieCreationDTO, moviesPostGetDTO } from "./movies.model";
+import { movieCreationDTO, moviePostGetDTO } from "./movies.model";
 
 export default function CreateMovie(){
     const [nonSelectedGenres, setNonSelectedGenres] = useState<GenreDTO[]>([]);
@@ -20,7 +20,7 @@ export default function CreateMovie(){
 
     useEffect( () => {
         axios.get(`${urlMovies}/PostGet`)
-        .then( (response: AxiosResponse<moviesPostGetDTO>) => {
+        .then( (response: AxiosResponse<moviePostGetDTO>) => {
             setNonSelectedGenres(response.data.genres);
             setNonSelectedMovieTheatres(response.data.movieTheatres);
             setLoading(false);

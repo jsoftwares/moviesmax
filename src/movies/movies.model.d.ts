@@ -33,7 +33,16 @@ export interface landingPageDTO {
     upcomingReleases?: movieDTO[];
 }
 
-export interface moviesPostGetDTO{
-    genres: GenreDTO[],
-    movieTheatres: movieTheatreDTO[]
+export interface moviePostGetDTO{
+    genres: GenreDTO[];
+    movieTheatres: movieTheatreDTO[];
+}
+
+export interface moviePutGetDTO{
+    movie: movieDTO;
+    selectedGenres: GenreDTO[];
+    nonSelectedGenres: GenreDTO[];
+    selectedMovieTheatres: movieTheatreDTO[];
+    nonSelectedMovieTheatres: movieTheatreDTO[];
+    actors: actorMovieDTO[];
 }
