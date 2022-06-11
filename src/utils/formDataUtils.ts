@@ -17,7 +17,7 @@ export function convertActorToFormData(actor: actorCreationDTO): FormData {
     return formData;
 }
 
-export function convertMovieToFormData(movie:movieCreationDTO) {
+export function convertMovieToFormData(movie: movieCreationDTO) {
     const formData = new FormData();
 
     formData.append('title', movie.title);
@@ -31,7 +31,7 @@ export function convertMovieToFormData(movie:movieCreationDTO) {
 
     if (movie.poster) formData.append('poster', movie.poster);
 
-    formData.append('genresId', JSON.stringify(movie.genresIds));
+    formData.append('genresIds', JSON.stringify(movie.genresIds));
     formData.append('movieTheatresIds', JSON.stringify(movie.movieTheatresIds));
     formData.append('actors', JSON.stringify(movie.actors));
 

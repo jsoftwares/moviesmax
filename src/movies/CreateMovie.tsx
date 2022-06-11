@@ -51,8 +51,7 @@ export default function CreateMovie(){
             {loading ? <Loading /> :
                 <MovieForm 
                     model={ {title: '', inTheatres: false, trailer: ''} } 
-                    onSubmit={ async values => {console.log(values);
-                     await create(values)} } 
+                    onSubmit={ async values => await create(values) } 
                     selectedGenres={[]}
                     nonSelectedGenres={nonSelectedGenres}
                     selectedMovieTheatres={[]}
