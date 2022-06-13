@@ -29,7 +29,7 @@ export interface movieCreationDTO {
 }
 
 export interface landingPageDTO {
-    inTheaters?: movieDTO[];
+    inTheatres?: movieDTO[];
     upcomingReleases?: movieDTO[];
 }
 

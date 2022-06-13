@@ -80,7 +80,7 @@ export default function TypeAheadActors(props: typeAheadActorsProps) {
                 )}
             />
             <ul className="list-group">
-                {props.actors.map(actor => <li 
+                {props.actors?.map(actor => <li 
                 key={actor.id}
                     draggable={true}
                     onDragStart={() => handleDragStart(actor)}
