@@ -1,9 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { urlGenres, urlMovies } from "../endpoints";
 import { GenreDTO } from "../genres/genres.model";
 import Button from "../utils/Button";
+import Pagination from "../utils/Pagination";
 import { movieDTO } from "./movies.model";
 import MoviesList from "./MoviesList";
 
@@ -16,8 +18,13 @@ export default function FilterMovies(){
         page: 1,
         recordsPerPage: 10
     };
+
     const [genres, setGenres] = useState<GenreDTO[]>([]);
     const [movies, setMovies] = useState<movieDTO[]>([]);
+    const [totalAmountOfPages, setTotalAmountOfPages] = useState(0);
+    
+    const navigate = useNavigate();
+    const query = new URLSearchParams(useLocation().search);
 
     useEffect(() => {
         axios.get(`${urlGenres}/all`)
@@ -27,15 +34,40 @@ export default function FilterMovies(){
     }, [])
 
     useEffect(() => {
+        /**We want to ensure that when d page is refreshed & there were filters, we want to retain those filter
+         * in d query string*/
+
+        // We check if title exists in d Query string & if yes we take it then set it as title of initialValues
+        // ! - ensure we cast Title to string & not as undefined or null which are other options GET() returns 
+        if (query.get('title')) initialValues.title = query.get('title')!;
+        if (query.get('genreId')) initialValues.genreId = parseInt(query.get('genreId')!, 10);
+        if (query.get('inTheatres')) initialValues.inTheatres = true;
+        if (query.get('upcomingReleases')) initialValues.upcomingReleases = true;
+        if (query.get('page')) initialValues.page = parseInt(query.get('page')!, 10);
+        
         searchMovies(initialValues);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     function searchMovies(values: filterMoviesForm) {
+        modifyURL(values);
         axios.get(`${urlMovies}/filter`, { params: values})
         .then((response: AxiosResponse<movieDTO[]>) => {
+            const records = parseInt(response.headers['totalamountofrecords'], 10);
+            setTotalAmountOfPages(Math.ceil(records / values.recordsPerPage));
             setMovies(response.data);
         });
+    }
+
+    function modifyURL(values: filterMoviesForm) {
+        let queryString: string[] = [];
+        if (values.title) queryString.push(`title=${values.title}`);
+        if (values.genreId !== 0) queryString.push(`genreId=${values.genreId}`);
+        if (values.inTheatres) queryString.push(`inTheatres=${values.inTheatres}`);
+        if (values.upcomingReleases) queryString.push(`upcomingReleases=${values.upcomingReleases}`);
+
+        queryString.push(`page=${values.page}`);
+        navigate(`/movies/filter?${queryString.join('&')}`);
     }
 
     return (
@@ -103,6 +135,14 @@ export default function FilterMovies(){
                         </Form>
 
                         <MoviesList movies={movies} />
+                        <Pagination
+                            totalAmountOfPages={totalAmountOfPages}
+                            currentPage={formikProps.values.page}
+                            onChange={newPage => {
+                                formikProps.values.page = newPage;
+                                searchMovies(formikProps.values);
+                            }}
+                        />
                     </>
                 )}
             </Formik>
