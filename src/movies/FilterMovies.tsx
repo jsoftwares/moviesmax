@@ -122,8 +122,8 @@ export default function FilterMovies(){
                                     <Button className='btn btn-primary btn-sm' onClick={ () => formikProps.submitForm()}>
                                         Filter
                                     </Button>
-                                    <Button className='btn btn-danger btn-sm ms-3' onClick={ () => {formikProps.
-                                        setValues(initialValues);
+                                    <Button className='btn btn-danger btn-sm ms-3' onClick={ () => {
+                                        formikProps.setValues(initialValues);
                                         searchMovies(initialValues);
                                         }}
                                     >
