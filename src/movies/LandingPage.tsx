@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import Authorize from "../auth/Authorize";
 import { urlMovies } from "../endpoints";
 import AlertContext from "../utils/AlertContext";
 import { landingPageDTO } from "./movies.model";
