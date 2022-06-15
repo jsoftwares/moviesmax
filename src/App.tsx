@@ -15,6 +15,11 @@ function App() {
     {name: 'email', value: 'jeff.ict@gmail.com'}
   ]);
 
+  // check if 'role' with value of 'admin' is part of the user's claims(info);
+  function isAdmin(){
+    return claims.findIndex(claim => claim.name === 'role' && claim.value === 'admin') > -1;
+  }
+
   return (
     <BrowserRouter>
       <AuthenticationContext.Provider value={ {claims, update: setClaims}}>
@@ -23,7 +28,12 @@ function App() {
           <Routes>
 
             {routes.map( route =>
-              <Route key={route.path} path={route.path} element={<route.component />} />
+              <Route key={route.path} path={route.path} 
+              element={
+                route.isAdmin && !isAdmin() ? <>
+                You are not allowed to access this page
+                </> :
+              <route.component />} />
             )}
 
           </Routes>
