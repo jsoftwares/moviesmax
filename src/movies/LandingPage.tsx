@@ -19,9 +19,7 @@ export default function LandingPage() {
   });
 
     return (
-        <AlertContext.Provider value={()=> loadData() }>
-            <Authorize authorized={<>You're authorized</>} notAuthorized={<>You're NOT authorized</>} role='admin' />
-            
+        <AlertContext.Provider value={()=> loadData() }>            
             <h3>In Theatres</h3>
             <MoviesList movies={movies.inTheatres} />
 

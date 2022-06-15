@@ -3,17 +3,20 @@ import Menu from './Menu';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import routes from './route-config';
 import configureValidations from './Validations';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { claim } from './auth/auth.model';
 import AuthenticationContext from './auth/AuthenticationContext';
+import { getClaims } from './auth/handleJWT';
 
 configureValidations();
 
 function App() {
 
-  const [claims, setClaims] = useState<claim[]>([
-    // {name: 'email', value: 'jeff.ict@gmail.com'}
-  ]);
+  const [claims, setClaims] = useState<claim[]>([]);
+
+  useEffect(() => {
+    setClaims(getClaims());
+  }, []);
 
   // check if 'role' with value of 'admin' is part of the user's claims(info);
   function isAdmin(){
