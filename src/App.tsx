@@ -12,7 +12,7 @@ configureValidations();
 function App() {
 
   const [claims, setClaims] = useState<claim[]>([
-    {name: 'email', value: 'jeff.ict@gmail.com'}
+    // {name: 'email', value: 'jeff.ict@gmail.com'}
   ]);
 
   // check if 'role' with value of 'admin' is part of the user's claims(info);

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Authorize from "./auth/Authorize";
 
@@ -7,7 +8,7 @@ export default function Menu() {
             <div className="container-fluid">
                 <NavLink to="/" className="nav-brand">MoviesMax</NavLink>
 
-                <div className="collapse navbar-collapse">
+                <div className="collapse navbar-collapse" style={{display: 'flex', justifyContent: 'space-between'}}>
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <NavLink to="/movies/filter" className="nav-link">Filter Movies</NavLink>
@@ -32,6 +33,18 @@ export default function Menu() {
                             }
                         />
                     </ul>
+                </div>
+
+                <div className="d-flex">
+                    <Authorize 
+                        authorized={<></>}
+                        notAuthorized={
+                            <>
+                                <Link to='/register' className='nav-link btn btn-link'>Register</Link>
+                                <Link to='/login' className='nav-link btn btn-link'>Login</Link>
+                            </>
+                        }
+                    />
                 </div>
             </div>
         </nav>

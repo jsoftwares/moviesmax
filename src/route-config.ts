@@ -1,6 +1,8 @@
 import CreateActor from "./actors/CreateActor";
 import EditActor from "./actors/EditActor";
 import IndexActors from "./actors/IndexActors";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
 import CreateGenre from "./genres/CreateGenre";
 import EditGenres from "./genres/EditGenre";
 import IndexGenres from "./genres/IndexGenres";
@@ -31,6 +33,9 @@ const routes = [
     {path: '/movies/edit/:id', component: EditMovie, isAdmin: true},
     {path: '/movies/filter', component: FilterMovies},
     {path: '/movies/:id', component: MovieDetails},
+
+    {path: '/register', component: Register},
+    {path: '/login', component: Login},
 
     {path: '/', component: LandingPage, exact: true},
     {path: '*', component: RedirectToLandingPage}
