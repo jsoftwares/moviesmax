@@ -1,9 +1,7 @@
 import axios, { AxiosResponse } from "axios";
-import { title } from "process";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { urlMovies, urlRatings } from "../endpoints";
 import coordinateDTO from "../utils/coordinatesDTO.model";

@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import AuthenticationContext from '../auth/AuthenticationContext';
 import './Ratings.css';
