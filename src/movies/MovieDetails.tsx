@@ -65,8 +65,8 @@ export default function MovieDetails() {
                         className='btn btn-primary btn-sm rounded-pill' 
                         to={`/movies/filter?genreId=${genre.id}`}
                     >{genre.name}</Link>)} | {movie.releaseDate.toDateString()} | Your rating: <Ratings 
-                        maximumValue={5} selectedValue={0} onChange={handleRating}
-                    />
+                        maximumValue={5} selectedValue={movie.userVote} onChange={handleRating}
+                    /> | Average Rating: {movie.averageVote}
 
                     <div style={{ display: 'flex', marginTop: '1rem'}}>
                         <span style={ {display: 'inline-block', marginRight: '1rem'}}>
