@@ -1,12 +1,15 @@
 import axios, { AxiosResponse } from "axios";
+import { title } from "process";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { urlMovies } from "../endpoints";
+import Swal from "sweetalert2";
+import { urlMovies, urlRatings } from "../endpoints";
 import coordinateDTO from "../utils/coordinatesDTO.model";
 import Loading from "../utils/Loading";
 import Map from "../utils/Map";
+import Ratings from "../utils/Ratings";
 import { movieDTO } from "./movies.model";
 
 export default function MovieDetails() {
@@ -46,6 +49,14 @@ export default function MovieDetails() {
         return `https://www.youtube.com/embed/${videoId}`;
     }
 
+    //this is d function whose reference is passed as d onChange props of Ratings component as required by our component
+    function handleRating(rating: number) {
+        axios.post(urlRatings, {rating, movieId: id})
+        .then(() => {
+            Swal.fire({icon: 'success', title: 'Rating received'})
+        });
+    }
+
 
     return (
         movie ? 
@@ -55,7 +66,9 @@ export default function MovieDetails() {
                     <Link key={genre.id} style={{marginRight: '5px'}}
                         className='btn btn-primary btn-sm rounded-pill' 
                         to={`/movies/filter?genreId=${genre.id}`}
-                    >{genre.name}</Link>)} | {movie.releaseDate.toDateString()}
+                    >{genre.name}</Link>)} | {movie.releaseDate.toDateString()} | Your rating: <Ratings 
+                        maximumValue={5} selectedValue={0} onChange={handleRating}
+                    />
 
                     <div style={{ display: 'flex', marginTop: '1rem'}}>
                         <span style={ {display: 'inline-block', marginRight: '1rem'}}>
