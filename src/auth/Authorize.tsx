@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useEffect, useState } from 'react'
+import { ReactElement, useContext, useEffect, useState } from 'react';
 import AuthenticationContext from './AuthenticationContext';
 
 export default function Authorize(props: authorizeProps) {
@@ -18,6 +18,7 @@ export default function Authorize(props: authorizeProps) {
         if (props.role) {
             const index = claims.findIndex(claim => claim.name === 'role' && claim.value === props.role);
             setIsAuthorized( index > -1 );
+            
         }else {
             setIsAuthorized(claims.length > 0);
         }
