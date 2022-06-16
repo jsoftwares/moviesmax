@@ -1,0 +1,62 @@
+import axios from "axios";
+import Swal from "sweetalert2";
+import { urlAccounts } from "../endpoints";
+import Button from "../utils/Button";
+import customConfirm from "../utils/CustomConfirm";
+import IndexEntity from "../utils/IndexEntity";
+import { userDTO } from "./auth.model";
+
+export default function IndexUsers() {
+
+    async function makeAdmin(userId: string) {
+        await doAdmin(`${urlAccounts}/makeAdmin`, userId);
+    }
+
+    async function removeAdmin(userId: string) {
+        await doAdmin(`${urlAccounts}/removeAdmin`, userId);
+    }
+
+    async function doAdmin(url: string, id:string){
+        await axios.post(url, JSON.stringify(id), {
+            headers: {'Content-Type': 'application/json'}
+        });
+
+        Swal.fire({
+            title: 'Success',
+            text: 'Operation dinished correctly',
+            icon: 'success'
+        });
+    }
+
+  return (
+    <IndexEntity<userDTO>
+        title='Users' url={`${urlAccounts}/listUsers`}
+    >
+        {users => <>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {users?.map(user => <tr key={user.id}>
+                    <td>{user.email}</td>
+                    <td>
+                        <Button className="btn btn-sm"
+                            onClick={() => customConfirm(() => makeAdmin(user.id), 
+                            `Do you wish to make ${user.email} an admin?`, 'Do It'
+                            ) }>Make Admin</Button>
+
+                        <Button className="btn btn-danger btn-sm ms-2"
+                            onClick={() => customConfirm(() => removeAdmin(user.id), 
+                            `Do you wish to remove ${user.email} as an admin?`, 'Do It'
+                            ) }>Remove Admin</Button>
+                    </td>
+                </tr>
+                )}
+            </tbody>
+        </>}
+    </IndexEntity>
+  )
+}

@@ -40,6 +40,9 @@ export default function Menu() {
                                     <li className="nav-item">
                                         <NavLink to="/movies/create" className="nav-link">Create a Movie</NavLink>
                                     </li>
+                                    <li className="nav-item">
+                                        <NavLink to="/users" className="nav-link">Users</NavLink>
+                                    </li>
                                 </>
                             }
                         />

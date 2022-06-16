@@ -1,7 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { ReactElement, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { urlGenres } from "../endpoints";
 import Button from "./Button";
 import customConfirm from "./CustomConfirm";
 import GenericList from "./GenericList";
@@ -53,7 +52,10 @@ export default function IndexEntity<T>(props: indexEntityProps<T>){
     return (
         <>
             <h3>{props.title}</h3>
-            <Link className="btn btn-primary btn-sm" to={props.createURL}>Create {props.entityName}</Link>
+            {props.createURL ? 
+                <Link className="btn btn-primary btn-sm" to={props.createURL}>Create {props.entityName}</Link> :
+                null
+            }
             <div className="d-flex flex-row mb-2">
                 <div className="col-6">
                     <RecordsPerPageSelect onChange={ amountOfrecords =>  {
@@ -80,8 +82,8 @@ export default function IndexEntity<T>(props: indexEntityProps<T>){
 
 interface  indexEntityProps<T> {
     url: string;
-    createURL: string;
+    createURL?: string;
     title: string;
-    entityName: string;
+    entityName?: string;
     children(entities:T[], buttons: (editUrl: string, id: number)=> ReactElement ): ReactElement
 }
