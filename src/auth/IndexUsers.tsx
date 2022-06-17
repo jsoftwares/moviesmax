@@ -23,7 +23,7 @@ export default function IndexUsers() {
 
         Swal.fire({
             title: 'Success',
-            text: 'Operation dinished correctly',
+            text: 'Operation finished correctly',
             icon: 'success'
         });
     }
@@ -43,7 +43,7 @@ export default function IndexUsers() {
                 {users?.map(user => <tr key={user.id}>
                     <td>{user.email}</td>
                     <td>
-                        <Button className="btn btn-sm"
+                        <Button 
                             onClick={() => customConfirm(() => makeAdmin(user.id), 
                             `Do you wish to make ${user.email} an admin?`, 'Do It'
                             ) }>Make Admin</Button>

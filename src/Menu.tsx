@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import AuthenticationContext from "./auth/AuthenticationContext";
 import Authorize from "./auth/Authorize";
@@ -9,6 +9,7 @@ import Button from "./utils/Button";
 export default function Menu() {
 
     const {claims, update} = useContext(AuthenticationContext);
+    const navigate = useNavigate();
 
     function getUserEmail(): string {
         return claims.filter(x => x.name === 'email')[0]?.value; //filter will return new array of claim object
@@ -56,6 +57,7 @@ export default function Menu() {
                             <Button className='nav-link btn btn-link' onClick={() => {
                                 logout();
                                 update([]);
+                                navigate('/login')
                             }}>Logout</Button>
                         </>}
                         notAuthorized={

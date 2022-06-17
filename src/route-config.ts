@@ -37,7 +37,7 @@ const routes = [
 
     {path: '/register', component: Register},
     {path: '/login', component: Login},
-    {path: '/users', component: IndexUsers, isAmin: true},
+    {path: '/users', component: IndexUsers, isAdmin: true},
 
     {path: '/', component: LandingPage, exact: true},
     {path: '*', component: RedirectToLandingPage}

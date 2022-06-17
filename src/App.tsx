@@ -36,7 +36,7 @@ function App() {
               <Route key={route.path} path={route.path} 
               element={
                 route.isAdmin && !isAdmin() ? <>
-                You are not allowed to access this page
+                <strong>You are not allowed to access this page</strong>
                 </> :
               <route.component />} />
             )}

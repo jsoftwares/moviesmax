@@ -13,7 +13,7 @@ export default function IndexActors() {
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>

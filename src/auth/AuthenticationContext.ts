@@ -9,7 +9,7 @@ import { claim } from "./auth.model";
  * distribute the claims of our user to other components */
 
 const AuthenticationContext = React.createContext<{
-    claims: claim[],
+    claims: claim[];
     update(claims: claim[]): void
 }>({ claims: [], update: () => {} });
 
